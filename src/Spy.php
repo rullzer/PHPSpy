@@ -20,7 +20,7 @@ class Spy {
 	 */
 	public function __construct($object) {
 		if (!is_object($object)) {
-			return new \InvalidArgumentException('Not called with an object');
+			throw new \InvalidArgumentException('Not called with an object');
 		}
 
 		$this->object = $object;

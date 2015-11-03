@@ -23,6 +23,24 @@ class dummyClass {
 
 class SpyTest extends \PHPUnit_Framework_TestCase {
 
+	public function dataCreateSpyFail() {
+		return [
+			[null],
+			[[]],
+			['foo'],
+			[42],
+		];
+	}
+
+	/**
+	 * @dataProvider dataCreateSpyFail
+	 * @expectedException InvalidArgumentException
+	 * @expectedExceptionMessage Not called with an object
+	 */
+	public function testCreateSpyFail($obj) {
+		$spy = new \PHPSpy\Spy($obj);
+	}
+
 	public function testGetCallCount() {
 		$class = new DummyClass();
 
