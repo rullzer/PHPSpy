@@ -37,6 +37,20 @@ class Spy {
 	}
 
 	/**
+	 * Filter the calls by function
+	 * 
+	 * @param string $function The function name to filter on
+	 * @return Call[]
+	 */
+	private function filterCalls($function) {
+		$calls = array_filter($this->calls, function($call) use ($function) {
+			return $call->getMethod() === $function;
+		});
+
+		return array_values($calls);
+	}
+
+	/**
 	 * Number of times the spy has been called
 	 *
 	 * @param string $function Count only calls to this function
@@ -47,28 +61,20 @@ class Spy {
 			return count($this->calls);
 		}
 
-		$calls = array_filter($this->calls, function($call) use ($function) {
-			return $call->getMethod() === $function;
-		});
-
-		return count($calls);
+		return count($this->filterCalls($function));
 	}
 
 	/**
 	 * Get all the spied calls
 	 *
 	 * @param string $function Return only calls to this function
-	 * @return Calls[]
+	 * @return Call[]
 	 */
 	public function getCalls($function = null) {
 		if ($function === null) {
 			return $this->calls;
 		}
 
-		$calls = array_filter($this->calls, function($call) use ($function) {
-			return $call->getMethod() === $function;
-		});
-
-		return array_values($calls);
+		return $this->filterCalls($function);
 	}
 }
