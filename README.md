@@ -1,6 +1,6 @@
 #PHPSpy#
 
-[![Build Status](https://travis-ci.org/rullzer/PHPSpy.svg?branch=master)](https://travis-ci.org/rullzer/PHPSpy.svg?branch=master)
+[![Build Status](https://travis-ci.org/rullzer/PHPSpy.svg?branch=master)](https://travis-ci.org/rullzer/PHPSpy)
 [![Coverage Status](https://coveralls.io/repos/rullzer/PHPSpy/badge.svg?branch=master&service=github)](https://coveralls.io/github/rullzer/PHPSpy?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/rullzer/PHPSpy/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/rullzer/PHPSpy/?branch=master)
 
