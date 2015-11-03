@@ -82,4 +82,47 @@ class SpyTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals('foobar', $calls[3]->getMethod());
 		$this->assertEquals(['c'], $calls[3]->getArguments());
 	}
+
+	public function testGetCallCountFor1Function() {
+		$class = new DummyClass();
+
+		$spy = new \PHPSpy\Spy($class);
+
+		$spy->foo();
+		$spy->bar(1);
+		$spy->foobar('a', 'b');
+		$spy->foobar('c');
+
+		$this->assertEquals(1, $spy->getCallCount('foo'));
+		$this->assertEquals(1, $spy->getCallCount('bar'));
+		$this->assertEquals(2, $spy->getCallCount('foobar'));
+	}
+
+	public function testGetCallsFor1Function() {
+		$class = new DummyClass();
+
+		$spy = new \PHPSpy\Spy($class);
+
+		$spy->foo();
+		$spy->bar(1);
+		$spy->foobar('a', 'b');
+		$spy->foobar('c');
+
+		$calls = $spy->getCalls('foo');
+		$this->assertCount(1, $calls);
+		$this->assertEquals('foo', $calls[0]->getMethod());
+		$this->assertEquals([], $calls[0]->getArguments());
+
+		$calls = $spy->getCalls('bar');
+		$this->assertCount(1, $calls);
+		$this->assertEquals('bar', $calls[0]->getMethod());
+		$this->assertEquals([1], $calls[0]->getArguments());
+
+		$calls = $spy->getCalls('foobar');
+		$this->assertCount(2, $calls);
+		$this->assertEquals('foobar', $calls[0]->getMethod());
+		$this->assertEquals(['a', 'b'], $calls[0]->getArguments());
+		$this->assertEquals('foobar', $calls[1]->getMethod());
+		$this->assertEquals(['c'], $calls[1]->getArguments());
+	}
 }

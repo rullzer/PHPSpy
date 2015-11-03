@@ -39,18 +39,36 @@ class Spy {
 	/**
 	 * Number of times the spy has been called
 	 *
+	 * @param string $function Count only calls to this function
 	 * @return int
 	 */
-	public function getCallCount() {
-		return count($this->calls);
+	public function getCallCount($function = null) {
+		if ($function === null) {
+			return count($this->calls);
+		}
+
+		$calls = array_filter($this->calls, function($call) use ($function) {
+			return $call->getMethod() === $function;
+		});
+
+		return count($calls);
 	}
 
 	/**
 	 * Get all the spied calls
 	 *
+	 * @param string $function Return only calls to this function
 	 * @return Calls[]
 	 */
-	public function getCalls() {
-		return $this->calls;
+	public function getCalls($function = null) {
+		if ($function === null) {
+			return $this->calls;
+		}
+
+		$calls = array_filter($this->calls, function($call) use ($function) {
+			return $call->getMethod() === $function;
+		});
+
+		return array_values($calls);
 	}
 }
