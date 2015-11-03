@@ -1,0 +1,24 @@
+{
+	"name" 			: "rullzer/phpspy",
+	"description"	: "Simple library to spy on objects",
+	"licence"		: "MIT",
+	"authors"		: [
+		{
+			"name":  "Roeland Jago Douma",
+			"email": "rullzer@owncloud.com"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"PHPSpy\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"PHPSpy\\Test\\": "tests/"
+		}
+	}
+}
