@@ -37,44 +37,12 @@ class Spy {
 	}
 
 	/**
-	 * Filter the calls by function
-	 * 
-	 * @param string $function The function name to filter on
-	 * @return Call[]
-	 */
-	private function filterCalls($function) {
-		$calls = array_filter($this->calls, function($call) use ($function) {
-			return $call->getMethod() === $function;
-		});
-
-		return array_values($calls);
-	}
-
-	/**
-	 * Number of times the spy has been called
+	 * Get a SpyData object that can be used to obtain information about this
+     * Spy. The SpyData object has references to this object so updates are live.
 	 *
-	 * @param string $function Count only calls to this function
-	 * @return int
+	 * @return SpyData
 	 */
-	public function getCallCount($function = null) {
-		if ($function === null) {
-			return count($this->calls);
-		}
-
-		return count($this->filterCalls($function));
-	}
-
-	/**
-	 * Get all the spied calls
-	 *
-	 * @param string $function Return only calls to this function
-	 * @return Call[]
-	 */
-	public function getCalls($function = null) {
-		if ($function === null) {
-			return $this->calls;
-		}
-
-		return $this->filterCalls($function);
+	public function __spyData() {
+		return new SpyData($this->calls);
 	}
 }
